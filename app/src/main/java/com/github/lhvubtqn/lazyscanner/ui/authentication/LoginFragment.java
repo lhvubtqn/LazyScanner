@@ -72,6 +72,22 @@ public class LoginFragment extends Fragment {
                 AuthenticationActivity.SwapFragment(AuthenticationActivity.FRAGMENT_FORGET_PASSWORD);
             }
         });
+
+        btn = root.findViewById(R.id.btn_google_login);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // do google login
+            }
+        });
+
+        btn = root.findViewById(R.id.btn_facebook_login);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // do facebook login
+            }
+        });
         return root;
     }
 
