@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_files">
+
+    <fragment
+        android:id="@+id/nav_files"
+        android:name="com.github.lhvubtqn.lazyscanner.ui.files.FilesFragment"
+        android:label="@string/menu_files"
+        tools:layout="@layout/fragment_files" />
+
+    <fragment
+        android:id="@+id/nav_translation"
+        android:name="com.github.lhvubtqn.lazyscanner.ui.translation.TranslationFragment"
+        android:label="@string/menu_translation"
+        tools:layout="@layout/fragment_translation" />
+
+    <fragment
+        android:id="@+id/nav_discussion"
+        android:name="com.github.lhvubtqn.lazyscanner.ui.discussion.DiscussionFragment"
+        android:label="@string/menu_discussion"
+        tools:layout="@layout/fragment_discussion" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.github.lhvubtqn.lazyscanner.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
