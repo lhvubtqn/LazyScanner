@@ -1,7 +1,9 @@
 package com.github.lhvubtqn.lazyscanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.github.lhvubtqn.lazyscanner.ui.authentication.AuthenticationActivity;
 import com.github.lhvubtqn.lazyscanner.utils.BroadcastUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -22,10 +24,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    private static View background;
+    private static ProgressBar progressBar;
+    private static boolean isLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        background = findViewById(R.id.main_background);
+        progressBar = findViewById(R.id.main_progress_bar);
+        isLoading = false;
     }
 
     @Override
@@ -70,6 +81,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSignOutClicked(MenuItem item) {
-        BroadcastUtil.sendBroadcast(BroadcastUtil.ACTION.SIGN_OUT, this, null, null);
+
+        new Runnable() {
+            @Override
+            public void run() {
+                toggleProgress();
+                BroadcastUtil.sendBroadcast(BroadcastUtil.ACTION.SIGN_OUT, MainActivity.this, null, null);
+                startActivity(new Intent(MainActivity.this, AuthenticationActivity.class));
+                finish();
+            }
+        }.run();
+    }
+
+    public static void toggleProgress() {
+        if (isLoading) {
+            background.setAlpha(1.0f);
+            progressBar.setVisibility(View.INVISIBLE);
+        } else {
+            background.setAlpha(0.6f);
+            progressBar.setVisibility(View.VISIBLE);
+        }
     }
 }

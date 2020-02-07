@@ -52,7 +52,7 @@ public class AuthenticationActivity extends FragmentActivity {
         progressBar = findViewById(R.id.authentication_progress_bar);
         isLoading = false;
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = myFragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.authentication_fragment_container, loginFragment);
             fragmentTransaction.commit();
@@ -72,7 +72,8 @@ public class AuthenticationActivity extends FragmentActivity {
             case FRAGMENT_FORGET_PASSWORD:
                 fragment = forgetPasswordFragment;
                 break;
-            default: return;
+            default:
+                return;
         }
         fragmentTransaction.replace(R.id.authentication_fragment_container, fragment);
         fragmentTransaction.commit();
@@ -83,18 +84,18 @@ public class AuthenticationActivity extends FragmentActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String name = intent.getStringExtra("name");
-                int status = intent.getIntExtra("status", 0);
-                if (name.equals(BroadcastUtil.NAME.LOGIN)) {
-                    if (status == BroadcastUtil.STATUS.OK) {
+                String status = intent.getStringExtra("status");
+                if (name.equals("login")) {
+                    if (status.equals("ok")) {
                         showMainActivity();
-                    }else {
+                    } else {
                         Toast.makeText(AuthenticationActivity.this, "Sai tên đăng nhập hoặc mật khẩu!",
                                 Toast.LENGTH_LONG).show();
                         if (isLoading)
                             toggleProgress();
                     }
-                } else if (name.equals(BroadcastUtil.NAME.SIGN_UP)) {
-                    if (status == BroadcastUtil.STATUS.OK) {
+                } else if (name.equals("sign up")) {
+                    if (status.equals("ok")) {
                         Toast.makeText(AuthenticationActivity.this, "Đăng ký thành công!",
                                 Toast.LENGTH_LONG).show();
                         String username = intent.getStringExtra("username");
@@ -105,7 +106,7 @@ public class AuthenticationActivity extends FragmentActivity {
                         loginFragment.preset(username, password);
                         fragmentTransaction.replace(R.id.authentication_fragment_container, loginFragment);
                         fragmentTransaction.commit();
-                    }else {
+                    } else {
                         Toast.makeText(AuthenticationActivity.this, "Tên đăng nhập đã tồn tại!",
                                 Toast.LENGTH_LONG).show();
                         if (isLoading)
@@ -132,6 +133,7 @@ public class AuthenticationActivity extends FragmentActivity {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
+
     @Override
     protected void onDestroy() {
         this.unregisterReceiver(this.broadcastReceiver);

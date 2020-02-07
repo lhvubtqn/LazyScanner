@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.github.lhvubtqn.lazyscanner.R;
+import com.github.lhvubtqn.lazyscanner.utils.BroadcastUtil;
 
 public class SignUpFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -35,11 +36,12 @@ public class SignUpFragment extends Fragment {
                     Toast.makeText(inflater.getContext(), "Mật khẩu không khớp, mời nhập lại!",
                             Toast.LENGTH_LONG).show();
                 } else {
-//                    try {
-//                        DATA.signup(getContext(), username, email, fullname, password);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
+                    // do sign up here
+                    // if success
+                    BroadcastUtil.sendBroadcast(
+                            BroadcastUtil.ACTION.AUTHENTICATION,
+                            getContext(),
+                            new String[] {"name", "status"}, new String[] {"sign up", "ok"}); // fail if failed
                 }
             }
         });

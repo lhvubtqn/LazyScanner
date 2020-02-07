@@ -11,16 +11,6 @@ public class BroadcastUtil {
         public static final String SIGN_OUT = "SIGN_OUT";
     }
 
-    public static final class STATUS {
-        public static final int OK = 0;
-        public static final int FAILED = 1;
-    }
-
-    public static final class NAME {
-        public static final String LOGIN = "LOGIN";
-        public static final String SIGN_UP = "SIGN UP";
-    }
-
     public class Params {
         public String[] names;
         public String[] values;

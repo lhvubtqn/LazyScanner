@@ -88,15 +88,17 @@ public class LoginFragment extends Fragment {
                     Toast.LENGTH_LONG).show();
             return;
         }
-        // DATA.login(getContext(), username, password);
+
         new Runnable() {
             @Override
             public void run() {
                 AuthenticationActivity.toggleProgress();
+                // do login here
+                // if success
                 BroadcastUtil.sendBroadcast(
                         BroadcastUtil.ACTION.AUTHENTICATION,
                         getContext(),
-                        BroadcastUtil.NAME.LOGIN, BroadcastUtil.STATUS.OK);
+                        new String[] {"name", "status"}, new String[] {"login", "ok"}); //failed if failed
             }
         }.run();
     }
