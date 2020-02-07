@@ -1,10 +1,5 @@
 *.iml
-<<<<<<< HEAD
-=======
 
-.gradle
-
->>>>>>> origin/ui
 /local.properties
 
 /.idea/caches
